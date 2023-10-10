@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Task Scheduler</title>
+    <style>
+        /* CSS for the modern and sophisticated look */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1 {
+            background-color: #d2691e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+        }
+
+        h2 {
+            background-color: #ffa07a;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #ffa07a;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="time"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"],
+        button[type="button"] {
+            background-color: #d2691e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button[type="submit"]:hover,
+        button[type="button"]:hover {
+            background-color: #ffa07a;
+        }
+
+        #reset-list-button {
+            background-color: #d2691e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            float: right;
+        }
+
+        #reset-list-button:hover {
+            background-color: #ffa07a;
+        }
+
+        /* Style for day sections */
+        .day-section {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        /* Style for navigation buttons */
+        .navigation-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .navigation-button {
+            background-color: #d2691e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        .navigation-button:hover {
+            background-color: #ffa07a;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Task Scheduler</h1>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons">
+        <button class="navigation-button" onclick="showAddUpdateSection()">Add/Update Employee</button>
+        <button class="navigation-button" onclick="showEmployeesSection()">Employees</button>
+    </div>
+
+    <!-- Employee Table -->
+    <div id="employees-section">
+        <h2>Employees</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+            </thead>
+            <tbody id="employee-table-body">
+                <!-- Employee data will be displayed here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add or Update Employee Form -->
+    <div id="add-update-section" style="display: none;">
+        <h2>Add or Update Employee</h2>
+        <form id="add-update-employee-form">
+            <label for="employee-name">Employee Name:</label>
+            <input type="text" id="employee-name" name="employee-name"><br>
+
+            <!-- Monday Section -->
+            <div class="day-section">
+                <h3>Monday</h3>
+                <label for="monday-start">Start Time:</label>
+                <input type="time" id="monday-start" name="monday-start">
+                <label for="monday-end">End Time:</label>
+                <input type="time" id="monday-end" name="monday-end">
+            </div>
+
+            <!-- Tuesday Section -->
+            <div class="day-section">
+                <h3>Tuesday</h3>
+                <label for="tuesday-start">Start Time:</label>
+                <input type="time" id="tuesday-start" name="tuesday-start">
+                <label for="tuesday-end">End Time:</label>
+                <input type="time" id="tuesday-end" name="tuesday-end">
+            </div>
+
+            <!-- Wednesday Section -->
+            <div class="day-section">
+                <h3>Wednesday</h3>
+                <label for="wednesday-start">Start Time:</label>
+                <input type="time" id="wednesday-start" name="wednesday-start">
+                <label for="wednesday-end">End Time:</label>
+                <input type="time" id="wednesday-end" name="wednesday-end">
+            </div>
+
+            <!-- Thursday Section -->
+            <div class="day-section">
+                <h3>Thursday</h3>
+                <label for="thursday-start">Start Time:</label>
+                <input type="time" id="thursday-start" name="thursday-start">
+                <label for="thursday-end">End Time:</label>
+                <input type="time" id="thursday-end" name="thursday-end">
+            </div>
+
+            <!-- Friday Section -->
+            <div class="day-section">
+                <h3>Friday</h3>
+                <label for="friday-start">Start Time:</label>
+                <input type="time" id="friday-start" name="friday-start">
+                <label for="friday-end">End Time:</label>
+                <input type="time" id="friday-end" name="friday-end">
+            </div>
+
+            <!-- Saturday Section -->
+            <div class="day-section">
+                <h3>Saturday</h3>
+                <label for="saturday-start">Start Time:</label>
+                <input type="time" id="saturday-start" name="saturday-start">
+                <label for="saturday-end">End Time:</label>
+                <input type="time" id="saturday-end" name="saturday-end">
+            </div>
+
+            <!-- Sunday Section -->
+            <div class="day-section">
+                <h3>Sunday</h3>
+                <label for="sunday-start">Start Time:</label>
+                <input type="time" id="sunday-start" name="sunday-start">
+                <label for="sunday-end">End Time:</label>
+                <input type="time" id="sunday-end" name="sunday-end">
+            </div>
+
+            <button type="submit">Add Employee</button>
+            <button type="button" id="update-button">Update</button>
+        </form>
+    </div>
+
+    <!-- Reset Button -->
+    <button type="button" id="reset-list-button">Reset List</button>
+
+    <script>
+        // JavaScript code to handle employee addition, display working hours, and store data in localStorage
+        const addUpdateEmployeeForm = document.getElementById('add-update-employee-form');
+        const employeeTableBody = document.getElementById('employee-table-body');
+        const updateButton = document.getElementById('update-button');
+        const resetListButton = document.getElementById('reset-list-button');
+        const employeesSection = document.getElementById('employees-section');
+        const addUpdateSection = document.getElementById('add-update-section');
+
+        // Function to load saved employee data from localStorage
+        function loadEmployeeData() {
+            const savedData = JSON.parse(localStorage.getItem('employeeData')) || [];
+            savedData.forEach((data) => {
+                displayEmployeeData(data);
+            });
+        }
+
+        // Event listener for adding or updating an employee
+        addUpdateEmployeeForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const employeeName = document.getElementById('employee-name').value;
+
+            // Create an object to store employee data
+            const employeeData = {
+                name: employeeName,
+                monday: {
+                    start: document.getElementById('monday-start').value,
+                    end: document.getElementById('monday-end').value,
+                },
+                tuesday: {
+                    start: document.getElementById('tuesday-start').value,
+                    end: document.getElementById('tuesday-end').value,
+                },
+                wednesday: {
+                    start: document.getElementById('wednesday-start').value,
+                    end: document.getElementById('wednesday-end').value,
+                },
+                thursday: {
+                    start: document.getElementById('thursday-start').value,
+                    end: document.getElementById('thursday-end').value,
+                },
+                friday: {
+                    start: document.getElementById('friday-start').value,
+                    end: document.getElementById('friday-end').value,
+                },
+                saturday: {
+                    start: document.getElementById('saturday-start').value,
+                    end: document.getElementById('saturday-end').value,
+                },
+                sunday: {
+                    start: document.getElementById('sunday-start').value,
+                    end: document.getElementById('sunday-end').value,
+                },
+            };
+
+            // Check if the employee already exists in localStorage
+            const savedData = JSON.parse(localStorage.getItem('employeeData')) || [];
+            const existingEmployeeIndex = savedData.findIndex((data) => data.name === employeeName);
+
+            if (existingEmployeeIndex !== -1) {
+                // Update the working hours for the existing employee
+                savedData[existingEmployeeIndex] = employeeData;
+            } else {
+                // Add the employee data to the saved data
+                savedData.push(employeeData);
+            }
+
+            // Save the updated employee data to localStorage
+            localStorage.setItem('employeeData', JSON.stringify(savedData));
+
+            // Display the employee data
+            displayEmployeeData(employeeData);
+
+            // Clear the form fields
+            document.getElementById('employee-name').value = '';
+            clearWorkingHoursFields();
+        });
+
+        // Event listener for the "Update" button
+        updateButton.addEventListener('click', function () {
+            const employeeName = document.getElementById('employee-name').value;
+
+            // Create an object to store employee data
+            const employeeData = {
+                name: employeeName,
+                monday: {
+                    start: document.getElementById('monday-start').value,
+                    end: document.getElementById('monday-end').value,
+                },
+                tuesday: {
+                    start: document.getElementById('tuesday-start').value,
+                    end: document.getElementById('tuesday-end').value,
+                },
+                wednesday: {
+                    start: document.getElementById('wednesday-start').value,
+                    end: document.getElementById('wednesday-end').value,
+                },
+                thursday: {
+                    start: document.getElementById('thursday-start').value,
+                    end: document.getElementById('thursday-end').value,
+                },
+                friday: {
+                    start: document.getElementById('friday-start').value,
+                    end: document.getElementById('friday-end').value,
+                },
+                saturday: {
+                    start: document.getElementById('saturday-start').value,
+                    end: document.getElementById('saturday-end').value,
+                },
+                sunday: {
+                    start: document.getElementById('sunday-start').value,
+                    end: document.getElementById('sunday-end').value,
+                },
+            };
+
+            // Find the employee in the table and update their working hours
+            const tableRows = employeeTableBody.querySelectorAll('tr');
+            for (let i = 0; i < tableRows.length; i++) {
+                const tableRow = tableRows[i];
+                const rowData = tableRow.children;
+                const rowEmployeeName = rowData[0].textContent;
+
+                if (rowEmployeeName === employeeName) {
+                    // Update the displayed working hours
+                    rowData[1].textContent = `${employeeData.monday.start} - ${employeeData.monday.end}`;
+                    rowData[2].textContent = `${employeeData.tuesday.start} - ${employeeData.tuesday.end}`;
+                    rowData[3].textContent = `${employeeData.wednesday.start} - ${employeeData.wednesday.end}`;
+                    rowData[4].textContent = `${employeeData.thursday.start} - ${employeeData.thursday.end}`;
+                    rowData[5].textContent = `${employeeData.friday.start} - ${employeeData.friday.end}`;
+                    rowData[6].textContent = `${employeeData.saturday.start} - ${employeeData.saturday.end}`;
+                    rowData[7].textContent = `${employeeData.sunday.start} - ${employeeData.sunday.end}`;
+                    break; // Stop searching after the first match
+                }
+            }
+
+            // Update the saved data in localStorage
+            const savedData = JSON.parse(localStorage.getItem('employeeData')) || [];
+            const existingEmployeeIndex = savedData.findIndex((data) => data.name === employeeName);
+
+            if (existingEmployeeIndex !== -1) {
+                // Update the working hours for the existing employee
+                savedData[existingEmployeeIndex] = employeeData;
+                // Save the updated employee data to localStorage
+                localStorage.setItem('employeeData', JSON.stringify(savedData));
+            }
+
+            // Clear the form fields
+            document.getElementById('employee-name').value = '';
+            clearWorkingHoursFields();
+        });
+
+        // Event listener for the "Reset List" button
+        resetListButton.addEventListener('click', function () {
+            // Clear the employee table
+            employeeTableBody.innerHTML = '';
+            // Clear saved employee data from localStorage
+            localStorage.removeItem('employeeData');
+        });
+
+        // Function to display employee data in the table
+        function displayEmployeeData(data) {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${data.name}</td>
+                <td>${data.monday.start} - ${data.monday.end}</td>
+                <td>${data.tuesday.start} - ${data.tuesday.end}</td>
+                <td>${data.wednesday.start} - ${data.wednesday.end}</td>
+                <td>${data.thursday.start} - ${data.thursday.end}</td>
+                <td>${data.friday.start} - ${data.friday.end}</td>
+                <td>${data.saturday.start} - ${data.saturday.end}</td>
+                <td>${data.sunday.start} - ${data.sunday.end}</td>
+            `;
+
+            // Add the row to the employee table
+            employeeTableBody.appendChild(newRow);
+        }
+
+        // Function to clear working hours fields
+        function clearWorkingHoursFields() {
+            const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+            for (const day of days) {
+                document.getElementById(`${day}-start`).value = '';
+                document.getElementById(`${day}-end`).value = '';
+            }
+        }
+
+        // Function to show the "Add/Update Employee" section
+        function showAddUpdateSection() {
+            employeesSection.style.display = 'none';
+            addUpdateSection.style.display = 'block';
+        }
+
+        // Function to show the "Employees" section
+        function showEmployeesSection() {
+            addUpdateSection.style.display = 'none';
+            employeesSection.style.display = 'block';
+        }
+
+        // Load saved employee data on page load
+        loadEmployeeData();
+    </script>
+</body>
+</html>
